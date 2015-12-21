@@ -22,7 +22,7 @@ const webpackConfig = {
   target: 'web',
   entry: {
     app: [
-      paths.base(config.dir_client) + '/app.js',
+      paths.base(config.dir_client) + '/app.jsx',
     ],
     vendor: config.compiler_vendor,
   },
