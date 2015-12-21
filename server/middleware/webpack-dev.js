@@ -7,7 +7,8 @@ const debug = require('debug')('app:server:webpack-dev');
 export default function ({ compiler, publicPath }) {
   debug('Enable Webpack dev middleware.');
 
-  /* eslint key-spacing:0 */
+  /* eslint-disable key-spacing */
+  /* eslint-disable new-cap */
   return WebpackDevMiddleware(compiler, {
     publicPath,
     contentBase : paths.base(config.dir_client),
@@ -15,6 +16,8 @@ export default function ({ compiler, publicPath }) {
     quiet       : config.compiler_quiet,
     noInfo      : config.compiler_quiet,
     lazy        : false,
-    stats       : config.compiler_stats
+    stats       : config.compiler_stats,
   });
+  /* eslint-enable new-cap */
+  /* eslint-enable key-spacing */
 }

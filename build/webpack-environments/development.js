@@ -44,7 +44,7 @@ export default (webpackConfig) => {
         const reactTransformHmr = {
           transform : 'react-transform-hmr',
           imports   : ['react'],
-          locals    : ['module']
+          locals    : ['module'],
         };
         loader.query.env.development.plugins[0][1].transforms
           .push(reactTransformHmr);

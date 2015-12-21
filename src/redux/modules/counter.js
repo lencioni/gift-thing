@@ -26,12 +26,12 @@ export const doubleAsync = () => {
 
 export const actions = {
   increment,
-  doubleAsync
+  doubleAsync,
 };
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
 export default handleActions({
-  [COUNTER_INCREMENT]: (state, { payload }) => state + payload
+  [COUNTER_INCREMENT]: (state, { payload }) => state + payload,
 }, 1);

@@ -10,10 +10,10 @@ import '../styles/core.scss';
 //
 // CoreLayout is a pure function of it's props, so we can
 // define it with a plain javascript function...
-function CoreLayout ({ children }) {
+function CoreLayout({ children }) {
   return (
-    <div className='page-container'>
-      <div className='view-container'>
+    <div className="page-container">
+      <div className="view-container">
         {children}
       </div>
     </div>
@@ -21,7 +21,7 @@ function CoreLayout ({ children }) {
 }
 
 CoreLayout.propTypes = {
-  children: React.PropTypes.element
+  children: React.PropTypes.element,
 };
 
 export default CoreLayout;

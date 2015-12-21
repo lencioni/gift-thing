@@ -32,13 +32,13 @@ export default (webpackConfig) => {
   debug('Inject ExtractText and UglifyJS plugins.');
   webpackConfig.plugins.push(
     new ExtractTextPlugin('[name].[contenthash].css', {
-      allChunks: true
+      allChunks: true,
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         unused: true,
-        dead_code: true
-      }
+        dead_code: true,
+      },
     })
   );
 

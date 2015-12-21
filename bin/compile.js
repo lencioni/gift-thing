@@ -9,18 +9,22 @@ const paths = config.utils_paths;
 debug('Create webpack compiler.');
 const compiler = require('webpack')(require('../build/webpack.config'));
 
-compiler.run(function (err, stats) {
+compiler.run(function compilerFn(err, stats) {
   const jsonStats = stats.toJson();
 
   debug('Webpack compile completed.');
+  /* eslint-disable no-console */
   console.log(stats.toString(config.compiler_stats));
+  /* eslint-enable no-console */
 
   if (err) {
     debug('Webpack compiler encountered a fatal error.', err);
     process.exit(1);
   } else if (jsonStats.errors.length > 0) {
     debug('Webpack compiler encountered errors.');
+    /* eslint-disable no-console */
     console.log(jsonStats.errors);
+    /* eslint-enable no-console */
     process.exit(1);
   } else if (jsonStats.warnings.length > 0) {
     debug('Webpack compiler encountered warnings.');

@@ -35,7 +35,7 @@ const config = {
   compiler_stats           : {
     chunks : false,
     chunkModules : false,
-    colors : true
+    colors : true,
   },
   compiler_vendor : [
     'history',
@@ -44,7 +44,7 @@ const config = {
     'react-router',
     'redux',
     'redux-actions',
-    'redux-simple-router'
+    'redux-simple-router',
   ],
 
   // ----------------------------------
@@ -53,8 +53,8 @@ const config = {
   coverage_enabled   : !argv.watch,
   coverage_reporters : [
     { type : 'text-summary' },
-    { type : 'html', dir : 'coverage' }
-  ]
+    { type : 'html', dir : 'coverage' },
+  ],
 };
 
 /************************************************
@@ -71,13 +71,13 @@ Edit at Your Own Risk
 // ------------------------------------
 config.globals = {
   'process.env'  : {
-    'NODE_ENV' : JSON.stringify(config.env)
+    'NODE_ENV' : JSON.stringify(config.env),
   },
   'NODE_ENV'     : config.env,
   '__DEV__'      : config.env === 'development',
   '__PROD__'     : config.env === 'production',
   '__DEBUG__'    : config.env === 'development' && !argv.no_debug,
-  '__DEBUG_NEW_WINDOW__' : !!argv.nw
+  '__DEBUG_NEW_WINDOW__' : !!argv.nw,
 };
 
 // ------------------------------------
@@ -106,9 +106,9 @@ config.utils_paths = (() => {
     resolve.apply(resolve, [config.path_base, ...args]);
 
   return {
-    base   : base,
+    base,
     client : base.bind(null, config.dir_client),
-    dist   : base.bind(null, config.dir_dist)
+    dist   : base.bind(null, config.dir_dist),
   };
 })();
 

@@ -7,7 +7,7 @@ const debug = require('debug')('app:server');
 const paths = config.utils_paths;
 
 app.use(historyApiFallback({
-  verbose: false
+  verbose: false,
 }));
 
 // Serve app with Webpack if HMR is enabled
@@ -18,7 +18,7 @@ if (config.compiler_enable_hmr) {
 
   app.use(require('./middleware/webpack-dev')({
     compiler,
-    publicPath: webpackConfig.output.publicPath
+    publicPath: webpackConfig.output.publicPath,
   }));
   app.use(require('./middleware/webpack-hmr')({ compiler }));
 } else {

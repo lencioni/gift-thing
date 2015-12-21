@@ -4,5 +4,5 @@ import counter from './counter';
 
 export default combineReducers({
   counter,
-  router: routeReducer
+  router: routeReducer,
 });

@@ -4,7 +4,7 @@ import { argv } from 'yargs';
 export default (config) => {
   const HMR_ENABLED = !!argv.hot;
   const overrides = {
-    compiler_enable_hmr : HMR_ENABLED
+    compiler_enable_hmr : HMR_ENABLED,
   };
 
   // We use an explicit public path when the assets are served by webpack
