@@ -1,0 +1,39 @@
+{
+  "lookup_paths": [
+    "src"
+  ],
+  "declaration_keyword": "import",
+  "aliases": {
+    "ReactRedux": {
+      "path": "react-redux",
+      "destructure": [
+        "connect"
+      ]
+    },
+    "ReactRouter": {
+      "path": "react-router",
+      "destructure": [
+        "Link"
+      ]
+    },
+    "Redux": {
+      "path": "redux",
+      "destructure": [
+        "combineReducers"
+      ]
+    },
+    "ReduxAction": {
+      "path": "redux-action",
+      "destructure": [
+        "createAction",
+        "handleActions"
+      ]
+    },
+    "ReduxSimpleRouter": {
+      "path": "redux-simple-router",
+      "destructure": [
+        "routeReducer"
+      ]
+    }
+  }
+}
