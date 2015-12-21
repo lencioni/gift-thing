@@ -10,7 +10,13 @@ const karmaConfig = {
   files: [
     './node_modules/phantomjs-polyfill/bind-polyfill.js',
     {
-      pattern: `./${config.dir_test}/**/*.(js|jsx)`,
+      pattern: `./${config.dir_test}/**/*.js`,
+      watched: false,
+      served: true,
+      included: true,
+    },
+    {
+      pattern: `./${config.dir_test}/**/*.jsx`,
       watched: false,
       served: true,
       included: true,
@@ -19,7 +25,8 @@ const karmaConfig = {
   singleRun: !argv.watch,
   frameworks: ['mocha', 'chai-sinon', 'chai-as-promised', 'chai'],
   preprocessors: {
-    [`${config.dir_test}/**/*.(js|jsx)`]: ['webpack'],
+    [`${config.dir_test}/**/*.js`]: ['webpack'],
+    [`${config.dir_test}/**/*.jsx`]: ['webpack'],
   },
   reporters: ['spec'],
   browsers: ['PhantomJS'],
