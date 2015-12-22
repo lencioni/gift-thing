@@ -103,7 +103,7 @@ app.get('/auth/login/facebook',
 
 app.get('/auth/login/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
-  (req, res) => res.redirect(`/api/users/${req.user.id}`)
+  (req, res) => res.redirect('/home')
 );
 
 app.get('/auth/logout', (req, res) => {
