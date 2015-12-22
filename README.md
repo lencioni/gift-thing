@@ -8,6 +8,13 @@ createdb gift_thing
 $(npm bin)/db-migrate up
 ```
 
+Running
+=======
+```sh
+redis-server --daemonize yes
+npm start
+```
+
 
 React Redux Starter Kit
 =======================

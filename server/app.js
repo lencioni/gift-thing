@@ -4,8 +4,10 @@ import db from './db';
 import express from 'express';
 import historyApiFallback from 'connect-history-api-fallback';
 import passport from 'passport';
+import redisStoreFactory from 'connect-redis';
 import session from 'express-session';
 
+const RedisStore = redisStoreFactory(session);
 const app = express();
 const debug = require('debug')('app:server');
 const paths = config.utils_paths;
@@ -88,6 +90,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   secret: 'fancy feast',
+  store: new RedisStore(),
 }));
 // Initialize Passport!  Also use passport.session() middleware, to support
 // persistent login sessions (recommended).
