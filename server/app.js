@@ -107,7 +107,18 @@ app.get('/auth/login/facebook/callback',
 
 app.get('/api/users/:id', (req, res) => {
   Queries.findUser(req.params.id)
-    .then(data => res.send(data))
+    .then(data => {
+      // Sanitize user data to prevent leaking secrets
+      const user = {
+        id: data.id,
+        name: data.name,
+      };
+      if (req.user && req.user.id === user.id) {
+        user.email_address = data.email_address;
+      }
+
+      res.send(user);
+    })
     .catch(error => res.send(error));
 });
 
