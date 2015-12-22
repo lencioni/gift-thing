@@ -107,6 +107,7 @@ app.get('/auth/login/facebook/callback',
 
 app.get('/api/users/:id', (req, res) => {
   Queries.findUser(req.params.id)
+    .catch(error => res.send(error))
     .then(data => {
       // Sanitize user data to prevent leaking secrets
       const user = {
@@ -118,8 +119,7 @@ app.get('/api/users/:id', (req, res) => {
       }
 
       res.send(user);
-    })
-    .catch(error => res.send(error));
+    });
 });
 
 // END API
