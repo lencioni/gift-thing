@@ -106,6 +106,11 @@ app.get('/auth/login/facebook/callback',
   (req, res) => res.redirect(`/api/users/${req.user.id}`)
 );
 
+app.get('/auth/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
+});
+
 // API
 
 app.get('/api/users/:id', (req, res) => {
