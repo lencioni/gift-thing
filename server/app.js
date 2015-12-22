@@ -1,10 +1,21 @@
 import express from 'express';
 import historyApiFallback from 'connect-history-api-fallback';
 import config from '../config';
+import db from './db';
 
 const app = express();
 const debug = require('debug')('app:server');
 const paths = config.utils_paths;
+
+// API
+
+app.get('/api/users/:id', (req, res) => {
+  db.one('SELECT * FROM users WHERE id = $1', req.params.id)
+    .then(data => res.send(data))
+    .catch(error => res.send(error));
+});
+
+// END API
 
 app.use(historyApiFallback({
   verbose: false,
