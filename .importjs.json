@@ -4,6 +4,8 @@
   ],
   "declaration_keyword": "import",
   "aliases": {
+    "FacebookStrategy": "passport-facebook",
+    "session": "express-session",
     "ReactRedux": {
       "path": "react-redux",
       "destructure": [

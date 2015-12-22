@@ -1,10 +1,14 @@
-/* eslint key-spacing:0 */
 import { argv } from 'yargs';
 
 export default (config) => {
   const HMR_ENABLED = !!argv.hot;
   const overrides = {
-    compiler_enable_hmr : HMR_ENABLED,
+    compiler_enable_hmr: HMR_ENABLED,
+    fb: {
+      app_id: '1500069193630452',
+      app_secret: '39b21db25cd8806ffd274faaed91c5dc',
+      callback_url: 'http://localhost:3000/auth/login/facebook/callback',
+    },
   };
 
   // We use an explicit public path when the assets are served by webpack
