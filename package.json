@@ -23,6 +23,7 @@
   "author": "David Zukowski <david@zuko.me> (http://zuko.me)",
   "license": "MIT",
   "dependencies": {
+    "async": "^1.5.0",
     "cssnano": "^3.3.2",
     "debug": "^2.2.0",
     "dotenv": "^1.2.0",
@@ -55,6 +56,7 @@
     "connect-history-api-fallback": "^1.1.0",
     "css-loader": "^0.23.0",
     "db-migrate": "^0.10.0-beta.6",
+    "db-migrate-pg": "^0.1.6",
     "eslint": "^1.10.3",
     "eslint-config-airbnb": "^2.1.1",
     "eslint-loader": "^1.1.1",

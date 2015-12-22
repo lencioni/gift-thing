@@ -1,0 +1,10 @@
+{
+  "dev": {
+    "driver": "pg",
+    "user": "gift_thing",
+    "password": "gift_thing",
+    "host": "localhost",
+    "database": "gift_thing",
+    "schema": "my_schema"
+  }
+}

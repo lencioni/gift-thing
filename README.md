@@ -1,3 +1,14 @@
+Installing
+==========
+```sh
+npm install
+pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
+createuser --createdb --password gift_thing # for password use gift_thing
+createdb gift_thing
+$(npm bin)/db-migrate up
+```
+
+
 React Redux Starter Kit
 =======================
 
