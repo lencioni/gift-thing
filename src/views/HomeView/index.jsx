@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import { actions as counterActions } from 'redux/modules/counter';
 import styles from './index.scss';
 
@@ -39,8 +38,6 @@ export class HomeView extends React.Component {
         >
           Double (Async)
         </button>
-        <hr />
-        <Link to="/about">Go To About View</Link>
       </div>
     );
   }
