@@ -102,7 +102,7 @@ app.get('/auth/login/facebook',
 );
 
 app.get('/auth/login/facebook/callback',
-  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  passport.authenticate('facebook', { failureRedirect: '/' }),
   (req, res) => res.redirect('/home')
 );
 
