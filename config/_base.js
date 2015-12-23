@@ -45,6 +45,7 @@ const config = {
     'redux',
     'redux-actions',
     'redux-simple-router',
+    'whatwg-fetch',
   ],
 
   // ----------------------------------
