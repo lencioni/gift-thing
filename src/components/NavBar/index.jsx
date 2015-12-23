@@ -20,7 +20,7 @@ export default class NavBar extends React.Component {
 
     return (
       <div className={styles.component}>
-        <Link to="/">
+        <Link to={currentUser ? '/home' : '/'}>
           Gift Thing
         </Link>
 
