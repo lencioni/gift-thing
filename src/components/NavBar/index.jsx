@@ -1,9 +1,23 @@
 import React from 'react';
 import styles from './index.scss';
 import { Link } from 'react-router';
+import { actions as currentUserActions } from 'redux/modules/currentUser';
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state) => ({
+  currentUser: state.currentUser,
+});
 
 export default class NavBar extends React.Component {
+  static propTypes = {
+    currentUser: React.PropTypes.object,
+  }
+
   render() {
+    const {
+      currentUser,
+    } = this.props;
+
     return (
       <div className={styles.component}>
         <Link to="/">
@@ -11,9 +25,16 @@ export default class NavBar extends React.Component {
         </Link>
 
         <div>
-          Log in
+          {currentUser &&
+            currentUser.name
+          }
+          {!currentUser &&
+            <Link to="/auth/login/facebook">Log in</Link>
+          }
         </div>
       </div>
     );
   }
 }
+
+export default connect(mapStateToProps, currentUserActions)(NavBar);
