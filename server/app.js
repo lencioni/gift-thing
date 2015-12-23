@@ -88,6 +88,18 @@ passport.use('facebook',
   })
 );
 
+// Simple route middleware to ensure user is authenticated.
+//   Use this route middleware on any resource that needs to be protected.  If
+//   the request is authenticated (typically via a persistent login session),
+//   the request will proceed.  Otherwise, the user will be redirected to the
+//   login page.
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/');
+}
+
 app.use(session({
   resave: false,
   saveUninitialized: false,
@@ -114,6 +126,8 @@ app.get('/auth/logout', (req, res) => {
 });
 
 // API
+app.get('/api/me', ensureAuthenticated,
+  (req, res) => res.json(req.user));
 
 app.get('/api/users/:id', (req, res) => {
   Queries.findUser(req.params.id)
@@ -161,18 +175,6 @@ if (config.compiler_enable_hmr) {
   // the web server and not the app server, but this helps to demo the
   // server in production.
   app.use(express.static(paths.base(config.dir_dist)));
-}
-
-// Simple route middleware to ensure user is authenticated.
-//   Use this route middleware on any resource that needs to be protected.  If
-//   the request is authenticated (typically via a persistent login session),
-//   the request will proceed.  Otherwise, the user will be redirected to the
-//   login page.
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect('/login');
 }
 
 export default app;
