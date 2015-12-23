@@ -128,7 +128,7 @@ app.get('/api/users/:id', (req, res) => {
         user.email_address = data.email_address;
       }
 
-      res.send(user);
+      res.json(user);
     });
 });
 
