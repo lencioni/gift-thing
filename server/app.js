@@ -37,11 +37,13 @@ class Queries {
 }
 
 passport.serializeUser((user, done) => {
-  done(null, user);
+  done(null, user.id);
 });
 
-passport.deserializeUser((user, done) => {
-  done(null, user);
+passport.deserializeUser((id, done) => {
+  Queries.findUser(id)
+    .catch(err => done(err))
+    .then(user => done(null, user));
 });
 
 passport.use('facebook',
