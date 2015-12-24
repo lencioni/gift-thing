@@ -2,6 +2,7 @@ import FacebookStrategy from 'passport-facebook';
 import Queries from './queries';
 import config from '../config';
 import express from 'express';
+import expressHandlebars from 'express-handlebars';
 import passport from 'passport';
 import redisStoreFactory from 'connect-redis';
 import session from 'express-session';
@@ -10,6 +11,11 @@ const RedisStore = redisStoreFactory(session);
 const app = express();
 const debug = require('debug')('app:server');
 const paths = config.utils_paths;
+
+// Set the rendering engine used by Express to handlebars. This will let use add
+// dynamic content to our templates.
+app.engine('.hbs', expressHandlebars({ extname: '.hbs' }));
+app.set('view engine', '.hbs');
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -128,20 +134,27 @@ if (config.compiler_enable_hmr) {
   const webpack = require('webpack');
   const webpackConfig = require('../build/webpack.config');
   const compiler = webpack(webpackConfig);
+
+  compiler.watch({}, (err, stats) => {
+    const publicPath = stats.compilation.outputOptions.publicPath;
+    const assets = Object.keys(stats.compilation.assets).map(
+      asset => `${publicPath}${asset}`);
+
+    // Fallback route for SPA
+    app.get('*', (req, res, next) => {
+      if (req.accepts('html')) {
+        res.render('index', { layout: false, assets });
+      } else {
+        next();
+      }
+    });
+  });
+
   app.use(require('./middleware/webpack-dev')({
     compiler,
     publicPath: webpackConfig.output.publicPath,
   }));
   app.use(require('./middleware/webpack-hmr')({ compiler }));
-
-  // Fallback route for SPA
-  app.get('*', (req, res, next) => {
-    if (req.accepts('html')) {
-      res.sendFile(`${webpackConfig.output.publicPath}/index.html`);
-    } else {
-      next();
-    }
-  });
 } else {
   debug(
     'Application is being run outside of development mode. This starter kit ' +

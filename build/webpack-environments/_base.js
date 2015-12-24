@@ -1,6 +1,5 @@
 import webpack from 'webpack';
 import cssnano from 'cssnano';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
 import config from '../../config';
 import _debug from 'debug';
 
@@ -35,16 +34,6 @@ const webpackConfig = {
     new webpack.DefinePlugin(config.globals),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
-    new HtmlWebpackPlugin({
-      template: paths.client('index.html'),
-      hash: false,
-      favicon: paths.client('assets/favicon.ico'),
-      filename: 'index.html',
-      inject: 'body',
-      minify: {
-        collapseWhitespace: true,
-      },
-    }),
   ],
   resolve: {
     root: paths.base(config.dir_client),
