@@ -2,7 +2,6 @@ import FacebookStrategy from 'passport-facebook';
 import Queries from './queries';
 import config from '../config';
 import express from 'express';
-import historyApiFallback from 'connect-history-api-fallback';
 import passport from 'passport';
 import redisStoreFactory from 'connect-redis';
 import session from 'express-session';
@@ -124,21 +123,25 @@ app.get('/api/users/:id', (req, res) => {
 
 // END API
 
-app.use(historyApiFallback({
-  verbose: false,
-}));
-
 // Serve app with Webpack if HMR is enabled
 if (config.compiler_enable_hmr) {
   const webpack = require('webpack');
   const webpackConfig = require('../build/webpack.config');
   const compiler = webpack(webpackConfig);
-
   app.use(require('./middleware/webpack-dev')({
     compiler,
     publicPath: webpackConfig.output.publicPath,
   }));
   app.use(require('./middleware/webpack-hmr')({ compiler }));
+
+  // Fallback route for SPA
+  app.get('*', (req, res, next) => {
+    if (req.accepts('html')) {
+      res.sendFile(`${webpackConfig.output.publicPath}/index.html`);
+    } else {
+      next();
+    }
+  });
 } else {
   debug(
     'Application is being run outside of development mode. This starter kit ' +
@@ -151,6 +154,14 @@ if (config.compiler_enable_hmr) {
   // the web server and not the app server, but this helps to demo the
   // server in production.
   app.use(express.static(paths.base(config.dir_dist)));
+  // TODO: figure out if this is the correct thing to do here
+  app.get('*', (req, res, next) => {
+    if (req.accepts('html')) {
+      res.sendFile(`${config.dir_dist}/index.html`);
+    } else {
+      next();
+    }
+  });
 }
 
 export default app;
