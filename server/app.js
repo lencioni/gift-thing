@@ -183,7 +183,10 @@ if (config.compiler_enable_hmr) {
       // Fallback route for SPA
       app.get('*', (req, res, next) => {
         if (req.accepts('html')) {
-          res.render('index', { layout: false, assets });
+          const initialState = JSON.stringify({
+            currentUser: req.user,
+          });
+          res.render('index', { layout: false, assets, initialState });
         } else {
           next();
         }
