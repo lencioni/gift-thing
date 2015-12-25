@@ -6,6 +6,12 @@
   "aliases": {
     "FacebookStrategy": "passport-facebook",
     "session": "express-session",
+    "React": {
+      "path": "react",
+      "destructure": [
+        "PropTypes"
+      ]
+    },
     "ReactRedux": {
       "path": "react-redux",
       "destructure": [
