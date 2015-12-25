@@ -1,7 +1,8 @@
-import webpack from 'webpack';
-import cssnano from 'cssnano';
-import config from '../../config';
+import { StatsWriterPlugin } from 'webpack-stats-plugin';
 import _debug from 'debug';
+import config from '../../config';
+import cssnano from 'cssnano';
+import webpack from 'webpack';
 
 const paths = config.utils_paths;
 const debug = _debug('app:webpack:_base');
@@ -34,6 +35,9 @@ const webpackConfig = {
     new webpack.DefinePlugin(config.globals),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
+    new StatsWriterPlugin({
+      fields: ['assetsByChunkName', 'publicPath'],
+    }),
   ],
   resolve: {
     root: paths.base(config.dir_client),

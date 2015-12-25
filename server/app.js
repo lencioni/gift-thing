@@ -5,6 +5,7 @@ import express from 'express';
 import expressHandlebars from 'express-handlebars';
 import passport from 'passport';
 import redisStoreFactory from 'connect-redis';
+import request from 'request';
 import session from 'express-session';
 
 const RedisStore = redisStoreFactory(session);
@@ -135,26 +136,59 @@ if (config.compiler_enable_hmr) {
   const webpackConfig = require('../build/webpack.config');
   const compiler = webpack(webpackConfig);
 
-  compiler.watch({}, (err, stats) => {
-    const publicPath = stats.compilation.outputOptions.publicPath;
-    const assets = Object.keys(stats.compilation.assets).map(
-      asset => `${publicPath}${asset}`);
-
-    // Fallback route for SPA
-    app.get('*', (req, res, next) => {
-      if (req.accepts('html')) {
-        res.render('index', { layout: false, assets });
-      } else {
-        next();
-      }
-    });
-  });
-
   app.use(require('./middleware/webpack-dev')({
     compiler,
     publicPath: webpackConfig.output.publicPath,
+    watchOptions: {
+      aggregateTimeout: 0,
+      poll: 0,
+    },
   }));
   app.use(require('./middleware/webpack-hmr')({ compiler }));
+
+  const getStats = function getStats() {
+    const promise = new Promise((resolve, reject) => {
+      const poll = 300;
+      let attemptsRemaining = 10;
+
+      function tryGetStats() {
+        request.get('http://localhost:3000/stats.json', (err, response, body) => {
+          if (!err && response.statusCode === 200) {
+            return resolve(JSON.parse(body));
+          }
+
+          attemptsRemaining--;
+          if (attemptsRemaining < 0) {
+            return reject(err);
+          }
+
+          setTimeout(tryGetStats, poll);
+        });
+      }
+
+      tryGetStats();
+    });
+
+    return promise;
+  };
+
+  getStats()
+    .catch(err => debug(err))
+    .then(stats => {
+      debug('Setting up fallback route');
+      const publicPath = stats.publicPath;
+      const assets = Object.values(stats.assetsByChunkName).map(
+        asset => `${publicPath}${asset}`);
+
+      // Fallback route for SPA
+      app.get('*', (req, res, next) => {
+        if (req.accepts('html')) {
+          res.render('index', { layout: false, assets });
+        } else {
+          next();
+        }
+      });
+    });
 } else {
   debug(
     'Application is being run outside of development mode. This starter kit ' +
