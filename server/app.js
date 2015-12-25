@@ -134,6 +134,9 @@ app.get('/api/users/:id/groups', (req, res) => {
     .then(data => res.json(data));
 });
 
+// Fallback route to render 404 for missing /api requests
+app.use('/api', (req, res) => res.status(404).json());
+
 // END API
 
 // Serve app with Webpack if HMR is enabled
