@@ -22,4 +22,14 @@ export default class Queries {
       { facebookId, facebookAccessToken, name, emailAddress }
     );
   }
+
+  static findUserGroups(userId) {
+    return db.any(
+      `SELECT g.*
+      FROM groups g
+        INNER JOIN user_groups ug ON ug.group_id = g.id
+      WHERE ug.user_id = $/userId/`,
+      { userId }
+    );
+  }
 }

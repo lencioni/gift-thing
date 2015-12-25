@@ -128,6 +128,12 @@ app.get('/api/users/:id', (req, res) => {
     });
 });
 
+app.get('/api/users/:id/groups', (req, res) => {
+  Queries.findUserGroups(req.params.id)
+    .catch(error => res.send(error))
+    .then(data => res.json(data));
+});
+
 // END API
 
 // Serve app with Webpack if HMR is enabled
