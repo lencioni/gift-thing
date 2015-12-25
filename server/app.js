@@ -129,6 +129,10 @@ app.get('/api/users/:id', (req, res) => {
 });
 
 app.get('/api/users/:id/groups', (req, res) => {
+  if (!req.user || req.user.id !== req.params.id) {
+    res.status(403).json();
+  }
+
   Queries.findUserGroups(req.params.id)
     .catch(error => res.send(error))
     .then(data => res.json(data));
