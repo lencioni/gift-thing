@@ -32,7 +32,7 @@ export default class NavBar extends React.Component {
             </div>
           }
           {!currentUser &&
-            <Link to="/auth/login/facebook">Log in</Link>
+            <a href="/auth/login/facebook">Log in</a>
           }
         </div>
       </div>
