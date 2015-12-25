@@ -26,7 +26,10 @@ export default class NavBar extends React.Component {
 
         <div>
           {currentUser &&
-            currentUser.name
+            <div>
+              {currentUser.name}{' '}
+              <a href="/auth/logout">Log out</a>
+            </div>
           }
           {!currentUser &&
             <Link to="/auth/login/facebook">Log in</Link>
