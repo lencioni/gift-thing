@@ -1,8 +1,9 @@
-import React from 'react';
-import styles from './index.scss';
 import { Link } from 'react-router';
-import { actions as currentUserActions } from 'redux/modules/currentUser';
 import { connect } from 'react-redux';
+import React from 'react';
+import { actions as currentUserActions } from 'redux/modules/currentUser';
+
+import styles from './index.scss';
 
 const mapStateToProps = (state) => ({
   currentUser: state.currentUser,

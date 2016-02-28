@@ -1,12 +1,13 @@
 import FacebookStrategy from 'passport-facebook';
-import Queries from './queries';
-import config from '../config';
 import express from 'express';
 import expressHandlebars from 'express-handlebars';
 import passport from 'passport';
 import redisStoreFactory from 'connect-redis';
 import request from 'request';
 import session from 'express-session';
+
+import Queries from './queries';
+import config from '../config';
 
 const RedisStore = redisStoreFactory(session);
 const app = express();

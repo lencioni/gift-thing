@@ -1,8 +1,9 @@
 import _debug from 'debug';
 
+import base from './_base';
+
 const debug = _debug('app:config');
 debug('Create configuration.');
-import base from './_base';
 
 debug(`Apply environment overrides for NODE_ENV "${base.env}".`);
 let overrides;

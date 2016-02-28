@@ -1,5 +1,6 @@
-import GroupsListContainer from 'containers/GroupsListContainer';
 import React from 'react';
+
+import GroupsListContainer from '../../containers/GroupsListContainer';
 
 export default class LoggedInHomeView extends React.Component {
   render() {

@@ -1,4 +1,5 @@
 import WebpackDevMiddleware from 'webpack-dev-middleware';
+
 import config from '../../config';
 
 const paths = config.utils_paths;

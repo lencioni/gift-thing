@@ -1,8 +1,9 @@
-import GroupsList from 'components/GroupsList';
-import React, { PropTypes } from 'react';
-import fetch from 'utils/fetch';
-import { actions as groupsActions } from 'redux/modules/groups';
 import { connect } from 'react-redux';
+import React, { PropTypes } from 'react';
+import { actions as groupsActions } from 'redux/modules/groups';
+
+import GroupsList from '../../components/GroupsList';
+import fetch from '../../utils/fetch';
 
 const mapStateToProps = (state) => ({
   currentUser: state.currentUser,

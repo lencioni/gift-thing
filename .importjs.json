@@ -1,48 +1,40 @@
-{
-  "lookup_paths": [
-    "src"
-  ],
-  "declaration_keyword": "import",
-  "aliases": {
-    "FacebookStrategy": "passport-facebook",
-    "session": "express-session",
-    "React": {
-      "path": "react",
-      "destructure": [
+[
+  {
+    "use_relative_paths": true,
+    "eslint_executable": "node_modules/.bin/eslint",
+    "aliases": {
+      "FacebookStrategy": "passport-facebook",
+      "session": "express-session",
+      "styles": "./index.scss"
+    },
+    "named_exports": {
+      "react": [
         "PropTypes"
-      ]
-    },
-    "ReactRedux": {
-      "path": "react-redux",
-      "destructure": [
+      ],
+      "react-redux": [
         "connect"
-      ]
-    },
-    "ReactRouter": {
-      "path": "react-router",
-      "destructure": [
+      ],
+      "react-router": [
         "Link"
-      ]
-    },
-    "Redux": {
-      "path": "redux",
-      "destructure": [
+      ],
+      "redux": [
         "combineReducers"
-      ]
-    },
-    "ReduxAction": {
-      "path": "redux-action",
-      "destructure": [
+      ],
+      "redux-action": [
         "createAction",
         "handleActions"
-      ]
-    },
-    "ReduxSimpleRouter": {
-      "path": "redux-simple-router",
-      "destructure": [
+      ],
+      "redux-simple-router": [
         "routeReducer"
       ]
-    },
-    "styles": "./index.scss"
+    }
+  },
+  {
+    "applies_to": "src/containers/Dev*",
+    "import_dev_dependencies": true
+  },
+  {
+    "applies_to": "server/**",
+    "import_dev_dependencies": true
   }
-}
+]
